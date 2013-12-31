@@ -1,5 +1,5 @@
-AngularJS hotkeys
-=================
+AngularJS alerts
+================
 
 Installation & setup
 --------------------
