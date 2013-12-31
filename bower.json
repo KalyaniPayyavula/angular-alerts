@@ -1,0 +1,11 @@
+{
+	"name": "Alerts",
+	"version": "0.1.0",
+	"tags": ["alerts", "flash", "messages", "angular", "drahak"],
+	"description": "Alerts component for AngularJS",
+	"devDependencies": {
+		"angularjs": "latest",
+		"angular-mocks": "latest",
+		"jasmine": "v2.0.0.rc5"
+	}
+}

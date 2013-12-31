@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html data-ng-app="drahak.alerts">
+	<head>
+		<title>AngularJS alerts</title>
+		<script type="text/javascript" src="bower_components/angular/angular.js"></script>
+		<script type="text/javascript" src="Alerts.js"></script>
+		<script type="text/javascript" src="Alerts.template.js"></script>
+		<script>
+			angular.module('drahak.alerts').controller('Example', function($scope, $alert) {
+				$scope.successAction = function() {
+					$alert('Success alert');
+				};
+				$scope.errorAction = function() {
+					$alert('Error alert', 'error');
+				};
+			});
+		</script>
+	</head>
+	<body data-ng-controller="Example">
+		<alerts></alerts>
+		<button data-ng-click="successAction()">Success</button>
+		<button data-ng-click="errorAction()">Error</button>
+	</body>
+</html>
