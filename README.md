@@ -9,7 +9,7 @@ Add dependency to your angular module.
 angular.module('myAwesomeApp', ['drahak.alerts']);
 ```
 
-Alerts have two files source and template so you can easily replace the template with your own. Just load it to template cache as `drahak/alerts.html`.
+Alerts module has two files: source and template so you can easily replace the template with your own. Just load it to template cache as `drahak/alerts.html` or `drahak/alert.html` (see directives below).
 
 Use
 ---
@@ -28,3 +28,11 @@ Service broadcasts to the scope event `$alert:add` with alert object `{ message:
 Directive
 ---------
 Use `alerts` directive as element or attribute to listen to scope events and render sent messages.
+
+Additionally you can use `alert` directive to render just one alert independent on model values. This directive is simple wrapper around repeater and uses `alert` directive for each one
+
+```html
+<alert type="info" ttl="5000" close="hidden = true" ng-show="!hidden">
+    The 'ttl' attribute is optional.
+</alert>
+```

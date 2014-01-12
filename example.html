@@ -25,6 +25,11 @@
 			<alerts></alerts>
 			<button data-ng-click="successAction()" class="btn btn-success">Success</button>
 			<button data-ng-click="errorAction()" class="btn btn-danger">Error</button>
+
+			<h1>Single alert</h1>
+			<alert type="info" ttl="5000" close="hidden = true" ng-show="!hidden">
+				The 'ttl' attribute is optional.
+			</alert>
 		</div>
 	</body>
 </html>
