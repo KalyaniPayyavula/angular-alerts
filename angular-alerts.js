@@ -56,4 +56,17 @@
 		}
 	});
 
+	alerts.directive('alert', function() {
+		return {
+			scope: {
+				close: '&',
+				type: '@'
+			},
+			replace: true,
+			transclude: true,
+			restrict: 'AE',
+			templateUrl: 'drahak/alert.html'
+		}
+	});
+
 })();
