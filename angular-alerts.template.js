@@ -8,8 +8,8 @@
 			'</section>');
 		$templateCache.put('drahak/alert.html',
 			'<div class="alert alert-{{ type }}">' +
-				'<button class="close" data-ng-click="close()">&times;</button>' +
 				'<span data-ng-transclude=""></span>' +
+				'<button class="close" data-ng-click="close()">&times;</button>' +
 			'</div>'
 		);
 	}])
