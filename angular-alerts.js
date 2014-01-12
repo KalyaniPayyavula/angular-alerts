@@ -8,13 +8,15 @@
 		/**
 		 * @param {String} message
 		 * @param {String} type
+		 * @param {ng.$rootScope.Scope} scope
 		 * @constructor
 		 */
-		var Alert = function(message, type) {
+		var Alert = function(message, type, scope) {
 			this.type = type || 'success';
 			this.message = message;
 
-			$rootScope.$broadcast('$alert:add', this);
+			this._scope = scope;
+			this._scope.$broadcast('$alert:add', this);
 		};
 
 		/**
@@ -22,14 +24,15 @@
 		 * @returns {Alert} self
 		 */
 		Alert.prototype.remove = function() {
-			$rootScope.$broadcast('$alert:remove', this);
+			this._scope.$broadcast('$alert:remove', this);
 			return this;
 		};
 
 		return function(message, type) {
-			return new Alert(message, type);
+			return new Alert(message, type, $rootScope);
 		}
 	}]);
+	alerts.service('$alerts', function() {});
 
 	alerts.directive('alerts', ['alertsTTL', function(alertsTTL) {
 		return {
