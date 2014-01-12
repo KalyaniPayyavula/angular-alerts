@@ -30,4 +30,9 @@ describe('Alert service', function() {
 		expect(scope.$broadcast).toHaveBeenCalledWith('$alert:remove', message);
 	});
 
+	it('removes all alerts', function() {
+		alert.removeAll();
+		expect(scope.$broadcast).toHaveBeenCalledWith('$alert:remove');
+	});
+
 });

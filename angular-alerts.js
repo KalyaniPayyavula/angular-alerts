@@ -28,11 +28,16 @@
 			return this;
 		};
 
-		return function(message, type) {
+		var AlertFactory = function(message, type) {
 			return new Alert(message, type, $rootScope);
-		}
+		};
+
+		AlertFactory.removeAll = function() {
+			$rootScope.$broadcast('$alert:remove');
+		};
+
+		return AlertFactory;
 	}]);
-	alerts.service('$alerts', function() {});
 
 	alerts.directive('alerts', ['alertsTTL', function(alertsTTL) {
 		return {
