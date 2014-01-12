@@ -2,6 +2,7 @@
 	'use strict';
 
 	var alerts = angular.module('drahak.alerts', []);
+	alerts.value('alertsTTL', false);
 	alerts.factory('$alert', ['$rootScope', function($rootScope) {
 
 		/**
@@ -30,14 +31,30 @@
 		}
 	}]);
 
-	alerts.directive('alerts', function() {
+	alerts.directive('alerts', ['alertsTTL', function(alertsTTL) {
 		return {
 			scope: {},
 			replace: true,
 			restrict: 'AE',
 			templateUrl: 'drahak/alerts.html',
 			link: function(scope) {
+
+				/** @type {Array.<Alert>} */
 				scope.alerts = [];
+
+				/** @type {{ ttl: Number }} */
+				scope.options = {
+					ttl: alertsTTL
+				};
+
+				/**
+				 * Close alert
+				 * @param {Number} index
+				 */
+				scope.close = function(index) {
+					scope.alerts.splice(index, 1);
+				};
+
 				scope.$on('$alert:add', function(evt, alert) {
 					scope.alerts.push(alert);
 				});
@@ -48,25 +65,27 @@
 						scope.close(scope.alerts.indexOf(alert));
 					}
 				});
-
-				scope.close = function(index) {
-					scope.alerts.splice(index, 1);
-				};
 			}
 		}
-	});
+	}]);
 
-	alerts.directive('alert', function() {
+	alerts.directive('alert', ['$timeout', function($timeout) {
 		return {
 			scope: {
 				close: '&',
-				type: '@'
+				type: '@',
+				ttl: '@'
 			},
 			replace: true,
 			transclude: true,
 			restrict: 'AE',
-			templateUrl: 'drahak/alert.html'
+			templateUrl: 'drahak/alert.html',
+			link: function(scope) {
+				if (scope.ttl > 0) {
+					$timeout(scope.close, scope.ttl);
+				}
+			}
 		}
-	});
+	}]);
 
 })();
