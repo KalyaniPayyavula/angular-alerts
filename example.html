@@ -2,6 +2,9 @@
 <html data-ng-app="drahak.alerts">
 	<head>
 		<title>AngularJS alerts</title>
+
+		<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
+
 		<script type="text/javascript" src="bower_components/angular/angular.js"></script>
 		<script type="text/javascript" src="angular-alerts.js"></script>
 		<script type="text/javascript" src="angular-alerts.template.js"></script>
@@ -17,8 +20,11 @@
 		</script>
 	</head>
 	<body data-ng-controller="Example">
-		<alerts></alerts>
-		<button data-ng-click="successAction()">Success</button>
-		<button data-ng-click="errorAction()">Error</button>
+		<div class="container">
+			<h1>Alerts</h1>
+			<alerts></alerts>
+			<button data-ng-click="successAction()" class="btn btn-success">Success</button>
+			<button data-ng-click="errorAction()" class="btn btn-danger">Error</button>
+		</div>
 	</body>
 </html>
