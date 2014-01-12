@@ -3,13 +3,30 @@
 
 	var alerts = angular.module('drahak.alerts', []);
 	alerts.factory('$alert', ['$rootScope', function($rootScope) {
-		return function(message, type) {
-			if (!type) type = 'success';
 
-			$rootScope.$broadcast('$alert:add', {
-				'message': message,
-				'type': type
-			});
+		/**
+		 * @param {String} message
+		 * @param {String} type
+		 * @constructor
+		 */
+		var Alert = function(message, type) {
+			this.type = type || 'success';
+			this.message = message;
+
+			$rootScope.$broadcast('$alert:add', this);
+		};
+
+		/**
+		 * Removes alert
+		 * @returns {Alert} self
+		 */
+		Alert.prototype.remove = function() {
+			$rootScope.$broadcast('$alert:remove', this);
+			return this;
+		};
+
+		return function(message, type) {
+			return new Alert(message, type);
 		}
 	}]);
 
@@ -21,11 +38,15 @@
 			templateUrl: 'drahak/alerts.html',
 			link: function(scope) {
 				scope.alerts = [];
-				scope.$on('$alert:add', function(evt, message) {
-					scope.alerts.push(message);
+				scope.$on('$alert:add', function(evt, alert) {
+					scope.alerts.push(alert);
 				});
-				scope.$on('$alert:remove', function(evt) {
-					scope.alerts.length = 0;
+				scope.$on('$alert:remove', function(evt, alert) {
+					if (!alert) {
+						scope.alerts.length = 0;
+					} else {
+						scope.close(scope.alerts.indexOf(alert));
+					}
 				});
 
 				scope.close = function(index) {

@@ -11,13 +11,23 @@ describe('Alert service', function() {
 	}));
 
 	it('broadcasts flash message to the scope', function() {
-		alert('AngularJS');
-		expect(scope.$broadcast).toHaveBeenCalledWith('$alert:add', { message: 'AngularJS', type: 'success' });
+		var message = alert('AngularJS');
+		expect(scope.$broadcast).toHaveBeenCalledWith('$alert:add', message);
+		expect(message.message).toBe('AngularJS');
+		expect(message.type).toBe('success');
 	});
 
 	it('uses custom alert type if specified', function() {
-		alert('Custom type', 'custom');
-		expect(scope.$broadcast).toHaveBeenCalledWith('$alert:add', { message: 'Custom type', type: 'custom' });
+		var message = alert('Custom type', 'custom');
+		expect(scope.$broadcast).toHaveBeenCalledWith('$alert:add', message);
+		expect(message.message).toBe('Custom type');
+		expect(message.type).toBe('custom');
+	});
+
+	it('removes alert', function() {
+		var message = alert('AngularJS', 'success');
+		message.remove();
+		expect(scope.$broadcast).toHaveBeenCalledWith('$alert:remove', message);
 	});
 
 });
