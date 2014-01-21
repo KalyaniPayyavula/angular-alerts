@@ -7,8 +7,5 @@
 		"karma-jasmine": "0.1.5",
 		"karma-chrome-launcher": "0.1.2",
 		"karma-phantomjs-launcher": "0.1.1"
-	},
-	"scripts": {
-		"test": "./test.sh"
 	}
 }
