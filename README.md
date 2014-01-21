@@ -1,4 +1,4 @@
-AngularJS alerts
+AngularJS alerts [![Build status](https://api.travis-ci.org/drahak/angular-alerts.png)](https://travis-ci.org/drahak/angular-alerts)
 ================
 
 Installation & setup
