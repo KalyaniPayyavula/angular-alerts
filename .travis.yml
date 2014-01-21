@@ -6,4 +6,4 @@ before_script:
   - bower install
 
 script:
-  - karma start ./unit.js --single-run --browsers PhantomJS --reporters=dots
+  - karma start ./karma.conf.js --single-run --browsers Firefox --reporters=dots
